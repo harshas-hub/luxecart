@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation('common');
+
   return (
     <footer className="relative z-10 mt-24 border-t border-white/15" style={{ background: 'rgba(10, 8, 30, 0.7)', backdropFilter: 'blur(12px)' }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -19,15 +22,15 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Premium shopping experience with curated products and exceptional service.
+              {t('footerTagline')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">Shop</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">{t('footerShop')}</h3>
             <ul className="space-y-3">
-              <li><Link to="/products" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">All Products</Link></li>
+              <li><Link to="/products" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">{t('footerAllProducts')}</Link></li>
               <li><Link to="/products?category=electronics" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Electronics</Link></li>
               <li><Link to="/products?category=jewelery" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Jewelry</Link></li>
               <li><Link to="/products?category=clothing" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Clothing</Link></li>
@@ -36,27 +39,27 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">Support</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">{t('footerSupport')}</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Shipping Info</a></li>
-              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Returns</a></li>
-              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">Contact Us</a></li>
+              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">{t('footerFAQ')}</a></li>
+              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">{t('footerShipping')}</a></li>
+              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">{t('footerReturns')}</a></li>
+              <li><a href="#" className="text-sm text-gray-300 hover:text-purple-300 transition-colors">{t('footerContact')}</a></li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">Stay Updated</h3>
-            <p className="text-sm text-gray-300 mb-4 leading-relaxed">Get exclusive offers and new arrivals straight to your inbox.</p>
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-5">{t('footerNewsletter')}</h3>
+            <p className="text-sm text-gray-300 mb-4 leading-relaxed">{t('footerNewsletterDesc')}</p>
             <div className="flex gap-2">
               <input
                 type="email"
-                placeholder="your@email.com"
+                placeholder={t('footerEmailPlaceholder')}
                 className="input-premium !py-2.5 !text-sm flex-1"
               />
               <button className="btn-premium !py-2.5 !px-4 text-sm whitespace-nowrap">
-                Subscribe
+                {t('footerSubscribe')}
               </button>
             </div>
           </div>
@@ -64,7 +67,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-300">© 2026 LuxeCart. All rights reserved.</p>
+          <p className="text-sm text-gray-300">{t('footerCopyright')}</p>
           <div className="flex items-center gap-6">
             {/* Twitter */}
             <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors" title="Twitter">

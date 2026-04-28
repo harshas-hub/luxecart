@@ -1,15 +1,18 @@
 import axios from 'axios';
+import i18n from './i18n';
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
-// Attach token to every request
+// Attach token + Accept-Language to every request
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('luxecart_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  // Attach current language for backend localization
+  config.headers['Accept-Language'] = i18n.language || 'en';
   return config;
 });
 
@@ -17,6 +20,9 @@ API.interceptors.request.use((config) => {
 export const register = (data) => API.post('/auth/register', data);
 export const login = (data) => API.post('/auth/login', data);
 export const getMe = () => API.get('/auth/me');
+
+// ---- Locale ----
+export const updateLocale = (locale) => API.put('/auth/locale', { locale });
 
 // ---- Products ----
 export const getProducts = (params) => API.get('/products', { params });

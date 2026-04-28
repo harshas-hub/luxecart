@@ -1,0 +1,18 @@
+{
+  "title": "Shopping Cart",
+  "empty": "Your cart is empty",
+  "emptySubtitle": "Looks like you haven't added anything to your cart yet.",
+  "startShopping": "Start Shopping",
+  "quantity": "Qty",
+  "size": "Size",
+  "remove": "Remove",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "freeShipping": "FREE",
+  "total": "Total",
+  "checkout": "Proceed to Checkout",
+  "continueShopping": "Continue Shopping",
+  "itemCount": "{{count}} item(s)",
+  "orderSummary": "Order Summary",
+  "priceEach": "each"
+}

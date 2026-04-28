@@ -1,0 +1,11 @@
+{
+  "home": "Home",
+  "products": "Products",
+  "orders": "Orders",
+  "signIn": "Sign In",
+  "signOut": "Sign Out",
+  "myOrders": "My Orders",
+  "cart": "Cart",
+  "signedInAs": "Signed in as",
+  "language": "Language"
+}

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { login, register } from '../api';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
+  const { t } = useTranslation('auth');
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,12 +46,10 @@ export default function LoginPage() {
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-white">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
+            {isLogin ? t('welcomeBack') : t('joinUs')}
           </h1>
           <p className="mt-2 text-sm text-gray-400">
-            {isLogin
-              ? 'Sign in to your LuxeCart account'
-              : 'Join LuxeCart for a premium experience'}
+            {isLogin ? t('welcomeSubtitle') : t('joinSubtitle')}
           </p>
         </div>
 
@@ -64,38 +64,38 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">Full Name</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('fullName')}</label>
               <input
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 className="input-premium"
-                placeholder="John Doe"
+                placeholder={t('fullNamePlaceholder')}
                 required={!isLogin}
               />
             </div>
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5">Email</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('email')}</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="input-premium"
-              placeholder="you@example.com"
+              placeholder={t('emailPlaceholder')}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5">Password</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('password')}</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="input-premium"
-              placeholder="••••••••"
+              placeholder={t('passwordPlaceholder')}
               required
             />
           </div>
@@ -114,9 +114,9 @@ export default function LoginPage() {
                 Processing...
               </span>
             ) : isLogin ? (
-              'Sign In'
+              t('loginButton')
             ) : (
-              'Create Account'
+              t('registerButton')
             )}
           </button>
         </form>
@@ -125,22 +125,22 @@ export default function LoginPage() {
         <div className="mt-6 text-center text-sm text-gray-400">
           {isLogin ? (
             <>
-              Don&apos;t have an account?{' '}
+              {t('switchToRegister')}{' '}
               <button
                 onClick={() => { setIsLogin(false); setError(''); }}
                 className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
               >
-                Sign Up
+                {t('registerLink')}
               </button>
             </>
           ) : (
             <>
-              Already have an account?{' '}
+              {t('switchToLogin')}{' '}
               <button
                 onClick={() => { setIsLogin(true); setError(''); }}
                 className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
               >
-                Sign In
+                {t('loginLink')}
               </button>
             </>
           )}

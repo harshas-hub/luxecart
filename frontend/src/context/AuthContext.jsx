@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getMe } from '../api';
+import i18n from '../i18n';
 
 const AuthContext = createContext(null);
 
@@ -11,7 +12,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       getMe()
-        .then((res) => setUser(res.data))
+        .then((res) => {
+          setUser(res.data);
+          // Restore user's preferred language on session restore
+          if (res.data.preferred_locale) {
+            i18n.changeLanguage(res.data.preferred_locale);
+          }
+        })
         .catch(() => {
           localStorage.removeItem('luxecart_token');
           setToken(null);
@@ -26,12 +33,18 @@ export function AuthProvider({ children }) {
     localStorage.setItem('luxecart_token', tokenValue);
     setToken(tokenValue);
     setUser(userData);
+
+    // Sync language from user's DB preference on login
+    if (userData?.preferred_locale) {
+      i18n.changeLanguage(userData.preferred_locale);
+    }
   };
 
   const logout = () => {
     localStorage.removeItem('luxecart_token');
     setToken(null);
     setUser(null);
+    // Keep current locale in localStorage — don't reset on logout
   };
 
   return (

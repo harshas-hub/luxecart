@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getProducts, getCategories } from '../api';
 import ProductCard from '../components/ProductCard';
 import Dropdown from '../components/Dropdown';
 
 export default function ProductsPage() {
+  const { t } = useTranslation('products');
+  const { t: tc } = useTranslation('common');
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -52,8 +55,8 @@ export default function ProductsPage() {
     <div className="max-w-7xl mx-auto px-6 pb-16">
       {/* Header */}
       <div className="mb-10 animate-fade-in-up">
-        <h1 className="text-3xl md:text-4xl font-bold text-white">All Products</h1>
-        <p className="mt-2 text-gray-400">Showing {total} products</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-white">{t('title')}</h1>
+        <p className="mt-2 text-gray-400">{total} {t('title').toLowerCase()}</p>
       </div>
 
       {/* Filters Bar */}
@@ -65,7 +68,7 @@ export default function ProductsPage() {
         <div className="flex-1 min-w-[200px]">
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="input-premium !py-2.5 !text-sm"
@@ -77,10 +80,10 @@ export default function ProductsPage() {
           value={categoryId}
           onChange={(val) => updateParam('category', val)}
           options={[
-            { label: 'All Categories', value: '' },
+            { label: t('allCategories'), value: '' },
             ...categories.map((cat) => ({ label: cat.name, value: String(cat.id) }))
           ]}
-          placeholder="All Categories"
+          placeholder={t('allCategories')}
         />
 
         {/* Sort */}
@@ -88,12 +91,12 @@ export default function ProductsPage() {
           value={sort}
           onChange={(val) => updateParam('sort', val)}
           options={[
-            { label: 'Newest', value: 'newest' },
-            { label: 'Price: Low → High', value: 'price_low' },
-            { label: 'Price: High → Low', value: 'price_high' },
-            { label: 'Top Rated', value: 'rating' }
+            { label: t('sortNewest'), value: 'newest' },
+            { label: t('sortPriceLow'), value: 'price_low' },
+            { label: t('sortPriceHigh'), value: 'price_high' },
+            { label: t('sortRating'), value: 'rating' }
           ]}
-          placeholder="Sort By"
+          placeholder={t('sortBy')}
         />
       </div>
 
@@ -117,8 +120,8 @@ export default function ProductsPage() {
           <svg className="w-16 h-16 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <h3 className="text-xl font-semibold text-gray-300">No products found</h3>
-          <p className="mt-2 text-gray-500">Try adjusting your search or filters</p>
+          <h3 className="text-xl font-semibold text-gray-300">{t('noProducts')}</h3>
+          <p className="mt-2 text-gray-500">{t('tryAdjusting')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -138,7 +141,7 @@ export default function ProductsPage() {
             disabled={page <= 1}
             className="px-4 py-2 glass text-sm font-medium text-gray-300 disabled:opacity-30 hover:bg-white/10 transition-colors rounded-xl"
           >
-            ← Prev
+            ← {tc('back')}
           </button>
           {[...Array(totalPages)].map((_, i) => (
             <button
@@ -158,7 +161,7 @@ export default function ProductsPage() {
             disabled={page >= totalPages}
             className="px-4 py-2 glass text-sm font-medium text-gray-300 disabled:opacity-30 hover:bg-white/10 transition-colors rounded-xl"
           >
-            Next →
+            {tc('next')} →
           </button>
         </div>
       )}

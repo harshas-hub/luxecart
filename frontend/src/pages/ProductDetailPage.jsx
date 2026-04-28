@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getProduct, getProducts } from '../api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -18,6 +19,8 @@ function StarRating({ rating }) {
 }
 
 export default function ProductDetailPage() {
+  const { t } = useTranslation('products');
+  const { t: tc } = useTranslation('common');
   const { id } = useParams();
   const { addToCart } = useCart();
   const { user } = useAuth();
@@ -92,9 +95,9 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-6 text-center py-20">
-        <h2 className="text-2xl text-gray-300">Product not found</h2>
+        <h2 className="text-2xl text-gray-300">{tc('noResults')}</h2>
         <Link to="/products" className="btn-premium mt-4 inline-block">
-          Back to Products
+          {tc('back')}
         </Link>
       </div>
     );
@@ -106,7 +109,7 @@ export default function ProductDetailPage() {
       <nav className="mb-8 flex items-center gap-2 text-sm text-gray-300 animate-fade-in">
         <Link to="/" className="hover:text-purple-400 transition-colors text-gray-300">Home</Link>
         <span className="text-gray-400">/</span>
-        <Link to="/products" className="hover:text-purple-400 transition-colors text-gray-300">Products</Link>
+        <Link to="/products" className="hover:text-purple-400 transition-colors text-gray-300">{t('title')}</Link>
         <span className="text-gray-400">/</span>
         <span className="text-white font-medium truncate max-w-[200px]">{product.title}</span>
       </nav>
@@ -145,7 +148,7 @@ export default function ProductDetailPage() {
           <div className="mt-4 flex items-center gap-3">
             <StarRating rating={product.rating} />
             <span className="text-sm text-gray-400">
-              {product.rating} ({product.rating_count} reviews)
+              {product.rating} ({product.rating_count} {t('ratings')})
             </span>
           </div>
 
@@ -165,7 +168,7 @@ export default function ProductDetailPage() {
           {/* Stock */}
           <div className="mt-3">
             <span className={`text-sm font-medium ${product.stock > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-              {product.stock > 0 ? `✓ In Stock (${product.stock} available)` : '✕ Out of Stock'}
+              {product.stock > 0 ? `✓ ${t('inStock')} (${product.stock})` : `✕ ${t('outOfStock')}`}
             </span>
           </div>
 
@@ -173,7 +176,7 @@ export default function ProductDetailPage() {
           {sizeList.length > 0 && (
             <div className="mt-8">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-200 font-medium">Select Size:</span>
+                <span className="text-sm text-gray-200 font-medium">{t('selectSize')}:</span>
                 <span className="text-xs text-purple-400 font-medium cursor-pointer hover:underline">Size Guide</span>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -197,7 +200,7 @@ export default function ProductDetailPage() {
           {/* Quantity & Add to Cart */}
           <div className="mt-8 space-y-4">
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-200 font-medium">Quantity:</span>
+              <span className="text-sm text-gray-200 font-medium">{t('quantity')}:</span>
               <div className="flex items-center glass rounded-xl overflow-hidden">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -228,13 +231,13 @@ export default function ProductDetailPage() {
                 }`}
               >
                 {added ? (
-                  <>✓ Added to Cart!</>
+                  <>✓ {t('addedToCart')}</>
                 ) : (
                   <>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                     </svg>
-                    Add to Cart
+                    {t('addToCart')}
                   </>
                 )}
               </button>
@@ -252,7 +255,7 @@ export default function ProductDetailPage() {
           {/* Features */}
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { icon: '🚚', text: 'Free Shipping' },
+              { icon: '🚚', text: tc('free') + ' Shipping' },
               { icon: '🔄', text: '30-Day Returns' },
               { icon: '🛡️', text: '2-Year Warranty' },
             ].map((f, i) => (
@@ -278,7 +281,7 @@ export default function ProductDetailPage() {
                   : 'text-gray-400 hover:text-gray-200'
               }`}
             >
-              {tab}
+              {tab === 'description' ? t('description') : tab === 'reviews' ? t('customerReviews') : tab}
               {selectedTab === tab && (
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500" />
               )}
@@ -293,9 +296,9 @@ export default function ProductDetailPage() {
           {selectedTab === 'specifications' && (
             <div className="space-y-3">
               {[
-                ['Category', product.category?.name || 'N/A'],
-                ['Rating', `${product.rating} / 5.0`],
-                ['Reviews', `${product.rating_count} reviews`],
+                [t('category'), product.category?.name || 'N/A'],
+                [tc('rating'), `${product.rating} / 5.0`],
+                [tc('reviews'), `${product.rating_count} ${t('ratings')}`],
                 ['Stock', `${product.stock} units`],
                 ['SKU', `LXC-${String(product.id).padStart(5, '0')}`],
               ].map(([label, value]) => (
@@ -308,7 +311,7 @@ export default function ProductDetailPage() {
           )}
           {selectedTab === 'reviews' && (
             <div className="text-center py-8">
-              <p className="text-gray-300 font-medium">Customer reviews coming soon!</p>
+              <p className="text-gray-300 font-medium">{t('customerReviews')} coming soon!</p>
               <p className="text-sm text-gray-400 mt-2">Be the first to review this product.</p>
             </div>
           )}
