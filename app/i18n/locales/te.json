@@ -1,0 +1,30 @@
+{
+  "order_status": {
+    "pending": "పెండింగ్",
+    "confirmed": "నిర్ధారించబడింది",
+    "shipped": "రవాణా చేయబడింది",
+    "delivered": "డెలివరీ అయింది",
+    "cancelled": "రద్దు చేయబడింది"
+  },
+  "messages": {
+    "payment_success": "చెల్లింపు విజయవంతంగా ప్రాసెస్ చేయబడింది!",
+    "payment_failed": "చెల్లింపు ప్రాసెస్ చేయడం సాధ్యం కాలేదు.",
+    "order_placed": "మీ ఆర్డర్ విజయవంతంగా ఇవ్వబడింది!",
+    "cart_empty": "మీ కార్ట్ ఖాళీగా ఉంది.",
+    "email_registered": "ఈ ఇమెయిల్ ఇప్పటికే నమోదు చేయబడింది.",
+    "invalid_credentials": "చెల్లని ఇమెయిల్ లేదా పాస్‌వర్డ్.",
+    "welcome": "LuxeCart API కి స్వాగతం!",
+    "locale_updated": "భాష ప్రాధాన్యత విజయవంతంగా నవీకరించబడింది.",
+    "invalid_locale": "మద్దతు లేని భాష. మద్దతు: en, de, te.",
+    "credentials_invalid": "ఆధారాలను ధృవీకరించడం సాధ్యం కాలేదు."
+  },
+  "labels": {
+    "order": "ఆర్డర్",
+    "total": "మొత్తం",
+    "shipping_address": "షిప్పింగ్ చిరునామా",
+    "quantity": "పరిమాణం",
+    "price": "ధర",
+    "size": "సైజు",
+    "status": "స్థితి"
+  }
+}

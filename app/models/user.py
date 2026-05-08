@@ -14,6 +14,7 @@ class User(Base):
     full_name = Column(String(200), nullable=False)
     address = Column(String(500), nullable=True)
     phone = Column(String(20), nullable=True)
+    preferred_locale = Column(String(10), default="en", nullable=False, server_default="en")
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     cart_items = relationship("CartItem", back_populates="user")

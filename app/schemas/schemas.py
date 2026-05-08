@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from typing import Optional
 
 
@@ -20,6 +20,7 @@ class UserResponse(BaseModel):
     full_name: str
     address: Optional[str] = None
     phone: Optional[str] = None
+    preferred_locale: str = "en"
 
     class Config:
         from_attributes = True
@@ -29,6 +30,11 @@ class Token(BaseModel):
     access_token: str
     token_type: str
     user: UserResponse
+
+
+# --- Locale Schema ---
+class LocaleUpdate(BaseModel):
+    locale: str
 
 
 # --- Category Schemas ---
@@ -116,6 +122,7 @@ class OrderResponse(BaseModel):
     id: int
     total: float
     status: str
+    status_display: Optional[str] = None  # Localized status label
     shipping_address: Optional[str] = None
     created_at: Optional[str] = None
     items: list[OrderItemResponse] = []
