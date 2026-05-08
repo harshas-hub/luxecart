@@ -115,7 +115,7 @@ export default function Navbar() {
                   {userMenuOpen && (
                     <>
                       <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
-                      <div className="absolute right-0 mt-2 w-56 glass-strong py-2 z-50 animate-fade-in">
+                      <div className="absolute right-0 mt-2 w-56 py-2 z-50 animate-fade-in rounded-2xl border border-purple-500/30 shadow-2xl shadow-black/60" style={{ background: '#1e1b3a' }}>
                         <div className="px-4 py-3 border-b border-white/10">
                           <p className="text-sm font-medium text-white">{user.full_name}</p>
                           <p className="text-xs text-gray-400 truncate">{user.email}</p>
