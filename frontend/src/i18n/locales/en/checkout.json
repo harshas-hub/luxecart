@@ -1,0 +1,18 @@
+{
+  "title": "Checkout",
+  "shippingAddress": "Shipping Address",
+  "fullAddress": "Full Address",
+  "addressPlaceholder": "Enter your full shipping address...",
+  "placeOrder": "Place Order",
+  "orderSummary": "Order Summary",
+  "items": "Items",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "freeShipping": "FREE",
+  "total": "Total",
+  "processing": "Processing...",
+  "loginRequired": "Please sign in to checkout",
+  "goToLogin": "Go to Login",
+  "cartEmpty": "Your cart is empty",
+  "goShopping": "Go Shopping"
+}

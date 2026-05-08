@@ -1,0 +1,18 @@
+{
+  "title": "Kasse",
+  "shippingAddress": "Lieferadresse",
+  "fullAddress": "Vollständige Adresse",
+  "addressPlaceholder": "Geben Sie Ihre vollständige Lieferadresse ein...",
+  "placeOrder": "Bestellung aufgeben",
+  "orderSummary": "Bestellübersicht",
+  "items": "Artikel",
+  "subtotal": "Zwischensumme",
+  "shipping": "Versand",
+  "freeShipping": "KOSTENLOS",
+  "total": "Gesamt",
+  "processing": "Wird verarbeitet...",
+  "loginRequired": "Bitte melden Sie sich an, um zur Kasse zu gehen",
+  "goToLogin": "Zum Login",
+  "cartEmpty": "Ihr Warenkorb ist leer",
+  "goShopping": "Einkaufen gehen"
+}

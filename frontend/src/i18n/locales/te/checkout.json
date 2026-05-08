@@ -1,0 +1,18 @@
+{
+  "title": "చెక్అవుట్",
+  "shippingAddress": "షిప్పింగ్ చిరునామా",
+  "fullAddress": "పూర్తి చిరునామా",
+  "addressPlaceholder": "మీ పూర్తి షిప్పింగ్ చిరునామా నమోదు చేయండి...",
+  "placeOrder": "ఆర్డర్ చేయండి",
+  "orderSummary": "ఆర్డర్ సారాంశం",
+  "items": "ఐటెమ్‌లు",
+  "subtotal": "ఉప మొత్తం",
+  "shipping": "షిప్పింగ్",
+  "freeShipping": "ఉచితం",
+  "total": "మొత్తం",
+  "processing": "ప్రాసెస్ అవుతోంది...",
+  "loginRequired": "చెక్అవుట్ చేయడానికి దయచేసి సైన్ ఇన్ చేయండి",
+  "goToLogin": "లాగిన్‌కు వెళ్ళండి",
+  "cartEmpty": "మీ కార్ట్ ఖాళీగా ఉంది",
+  "goShopping": "షాపింగ్ చేయండి"
+}

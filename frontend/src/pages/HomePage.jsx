@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getProducts, getCategories } from '../api';
 import ProductCard from '../components/ProductCard';
 
@@ -16,6 +17,8 @@ function getCategoryImage(name) {
 }
 
 export default function HomePage() {
+  const { t } = useTranslation('products');
+  const { t: tc } = useTranslation('common');
   const [featured, setFeatured] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +42,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-6 pt-12 pb-20">
         <div className="text-center animate-fade-in-up">
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 mb-6">
-            ✨ Premium Shopping Experience
+            ✨ {t('heroTitle')}
           </span>
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
             <span className="bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
@@ -51,18 +54,17 @@ export default function HomePage() {
             </span>
           </h1>
           <p className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Explore our curated collection of premium products. From electronics to fashion, 
-            find everything you need with an experience you&apos;ll love.
+            {t('heroSubtitle')}
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <Link to="/products" className="btn-premium text-base">
-              Shop Now
+              {tc('shopNow')}
               <svg className="inline-block w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
             <Link to="/products" className="btn-outline text-base">
-              Browse Categories
+              {t('browseCollection')}
             </Link>
           </div>
         </div>
@@ -70,10 +72,10 @@ export default function HomePage() {
         {/* Stats */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { value: '500+', label: 'Products' },
+            { value: '500+', label: t('title') },
             { value: '50K+', label: 'Customers' },
-            { value: '4.9', label: 'Rating' },
-            { value: '24/7', label: 'Support' },
+            { value: '4.9', label: tc('rating') },
+            { value: '24/7', label: t('support247') },
           ].map((stat, i) => (
             <div key={i} className="glass text-center py-6 animate-fade-in-up" style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
               <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -89,9 +91,9 @@ export default function HomePage() {
       {categories.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 pb-20">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Shop by Category</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">{t('shopByCategory')}</h2>
             <Link to="/products" className="text-sm text-purple-400 hover:text-purple-300 transition-colors">
-              View All →
+              {tc('viewAll')} →
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -123,9 +125,9 @@ export default function HomePage() {
       {/* ===== FEATURED PRODUCTS ===== */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Featured Products</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-white">{t('featured')}</h2>
           <Link to="/products" className="text-sm text-purple-400 hover:text-purple-300 transition-colors">
-            View All →
+            {tc('viewAll')} →
           </Link>
         </div>
 
@@ -159,12 +161,12 @@ export default function HomePage() {
         <div className="glass-strong p-12 md:p-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-500/20 to-rose-500/20" />
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Elevate Your Style?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t('whyChooseUs')}</h2>
             <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-              Join thousands of happy customers who trust LuxeCart for premium shopping.
+              {t('featuredSubtitle')}
             </p>
             <Link to="/products" className="btn-premium text-lg">
-              Start Shopping
+              {tc('shopNow')}
             </Link>
           </div>
         </div>

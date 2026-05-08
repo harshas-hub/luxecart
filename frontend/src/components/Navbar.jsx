@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
+  const { t } = useTranslation('nav');
   const { user, logout } = useAuth();
   const { cart, lastAdded } = useCart();
   const location = useLocation();
@@ -29,9 +32,9 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/products', label: 'Products' },
-    ...(user ? [{ to: '/orders', label: 'Orders' }] : []),
+    { to: '/', label: t('home') },
+    { to: '/products', label: t('products') },
+    ...(user ? [{ to: '/orders', label: t('orders') }] : []),
   ];
 
   return (
@@ -69,6 +72,9 @@ export default function Navbar() {
 
           {/* Right Side */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+
             {/* Cart Icon */}
             <Link
               to="/cart"
@@ -116,11 +122,11 @@ export default function Navbar() {
                         </div>
                         <Link to="/orders" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-                          My Orders
+                          {t('myOrders')}
                         </Link>
                         <Link to="/cart" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg>
-                          Cart ({cart.item_count})
+                          {t('cart')} ({cart.item_count})
                         </Link>
                         <div className="border-t border-white/10 mt-1 pt-1">
                           <button
@@ -128,7 +134,7 @@ export default function Navbar() {
                             className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-                            Sign Out
+                            {t('signOut')}
                           </button>
                         </div>
                       </div>
@@ -137,7 +143,7 @@ export default function Navbar() {
                 </div>
               ) : (
                 <Link to="/login" className="btn-premium text-sm !py-2 !px-5">
-                  Sign In
+                  {t('signIn')}
                 </Link>
               )}
             </div>
@@ -177,23 +183,23 @@ export default function Navbar() {
               </Link>
             ))}
             <Link to="/cart" className="block px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-              Cart {cart.item_count > 0 && `(${cart.item_count})`}
+              {t('cart')} {cart.item_count > 0 && `(${cart.item_count})`}
             </Link>
             {user ? (
               <div className="pt-2 border-t border-white/10 mt-2">
                 <div className="px-4 py-2 text-xs text-gray-500">
-                  Signed in as {user.full_name}
+                  {t('signedInAs')} {user.full_name}
                 </div>
                 <button
                   onClick={logout}
                   className="w-full text-left px-4 py-3 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-colors"
                 >
-                  Sign Out
+                  {t('signOut')}
                 </button>
               </div>
             ) : (
               <Link to="/login" className="block btn-premium text-center text-sm mt-2">
-                Sign In
+                {t('signIn')}
               </Link>
             )}
           </div>

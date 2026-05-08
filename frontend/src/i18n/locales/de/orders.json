@@ -1,0 +1,20 @@
+{
+  "title": "Meine Bestellungen",
+  "empty": "Noch keine Bestellungen",
+  "emptySubtitle": "Wenn Sie eine Bestellung aufgeben, wird sie hier angezeigt.",
+  "startShopping": "Einkaufen starten",
+  "orderNumber": "Bestellung #{{id}}",
+  "status": "Status",
+  "total": "Gesamt",
+  "date": "Datum",
+  "items": "Artikel",
+  "shippingAddress": "Lieferadresse",
+  "pending": "Ausstehend",
+  "confirmed": "Bestätigt",
+  "shipped": "Versendet",
+  "delivered": "Zugestellt",
+  "cancelled": "Storniert",
+  "quantity": "Menge",
+  "size": "Größe",
+  "loginRequired": "Bitte melden Sie sich an, um Ihre Bestellungen zu sehen"
+}

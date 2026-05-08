@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../context/CartContext';
 
 function StarRating({ rating }) {
@@ -17,6 +18,8 @@ function StarRating({ rating }) {
 }
 
 export default function ProductCard({ product, index = 0 }) {
+  const { t } = useTranslation('products');
+  const { t: tc } = useTranslation('common');
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
@@ -70,7 +73,7 @@ export default function ProductCard({ product, index = 0 }) {
           {/* Out of stock overlay */}
           {product.stock <= 0 && (
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-              <span className="text-red-400 font-bold text-lg">Sold Out</span>
+              <span className="text-red-400 font-bold text-lg">{tc('outOfStock')}</span>
             </div>
           )}
         </div>
@@ -108,7 +111,7 @@ export default function ProductCard({ product, index = 0 }) {
               ? 'text-emerald-400 bg-emerald-400/10'
               : 'text-red-400 bg-red-400/10'
           }`}>
-            {product.stock > 0 ? 'In Stock' : 'Sold Out'}
+            {product.stock > 0 ? tc('inStock') : tc('outOfStock')}
           </span>
         </div>
 
@@ -129,13 +132,13 @@ export default function ProductCard({ product, index = 0 }) {
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
             ) : added ? (
-              <>✓ Added</>
+              <>✓ {t('addedToCart')}</>
             ) : (
               <>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                 </svg>
-                Add
+                {t('addToCart')}
               </>
             )}
           </button>

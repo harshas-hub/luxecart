@@ -1,0 +1,18 @@
+{
+  "title": "Warenkorb",
+  "empty": "Ihr Warenkorb ist leer",
+  "emptySubtitle": "Es sieht so aus, als hätten Sie noch nichts in Ihren Warenkorb gelegt.",
+  "startShopping": "Einkaufen starten",
+  "quantity": "Menge",
+  "size": "Größe",
+  "remove": "Entfernen",
+  "subtotal": "Zwischensumme",
+  "shipping": "Versand",
+  "freeShipping": "KOSTENLOS",
+  "total": "Gesamt",
+  "checkout": "Zur Kasse",
+  "continueShopping": "Weiter einkaufen",
+  "itemCount": "{{count}} Artikel",
+  "orderSummary": "Bestellübersicht",
+  "priceEach": "je"
+}

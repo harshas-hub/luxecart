@@ -1,0 +1,20 @@
+{
+  "title": "My Orders",
+  "empty": "No orders yet",
+  "emptySubtitle": "When you place an order, it will appear here.",
+  "startShopping": "Start Shopping",
+  "orderNumber": "Order #{{id}}",
+  "status": "Status",
+  "total": "Total",
+  "date": "Date",
+  "items": "Items",
+  "shippingAddress": "Shipping Address",
+  "pending": "Pending",
+  "confirmed": "Confirmed",
+  "shipped": "Shipped",
+  "delivered": "Delivered",
+  "cancelled": "Cancelled",
+  "quantity": "Qty",
+  "size": "Size",
+  "loginRequired": "Please sign in to view your orders"
+}

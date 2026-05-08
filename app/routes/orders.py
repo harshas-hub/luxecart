@@ -8,8 +8,32 @@ from app.models.cart import CartItem
 from app.models.order import Order, OrderItem
 from app.models.product import Product
 from app.schemas.schemas import OrderCreate, OrderResponse
+from app.i18n import get_locale, translator
 
 router = APIRouter(prefix="/api/orders", tags=["Orders"])
+
+
+def _build_order_response(order: Order, locale: str) -> OrderResponse:
+    """Helper to build a localized OrderResponse from an Order model."""
+    return OrderResponse(
+        id=order.id,
+        total=order.total,
+        status=order.status,
+        status_display=translator.t(locale, f"order_status.{order.status}"),
+        shipping_address=order.shipping_address,
+        created_at=str(order.created_at) if order.created_at else None,
+        items=[
+            {
+                "id": i.id,
+                "product_id": i.product_id,
+                "quantity": i.quantity,
+                "size": i.size,
+                "price_at_time": i.price_at_time,
+                "product": i.product,
+            }
+            for i in order.items
+        ],
+    )
 
 
 @router.post("", response_model=OrderResponse)
@@ -17,6 +41,7 @@ def create_order(
     order_data: OrderCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    locale: str = Depends(get_locale),
 ):
     cart_items = (
         db.query(CartItem)
@@ -28,7 +53,7 @@ def create_order(
     if not cart_items:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cart is empty",
+            detail=translator.t(locale, "messages.cart_empty"),
         )
 
     total = sum(item.product.price * item.quantity for item in cart_items)
@@ -65,30 +90,14 @@ def create_order(
         .first()
     )
 
-    return OrderResponse(
-        id=order.id,
-        total=order.total,
-        status=order.status,
-        shipping_address=order.shipping_address,
-        created_at=str(order.created_at) if order.created_at else None,
-        items=[
-            {
-                "id": i.id,
-                "product_id": i.product_id,
-                "quantity": i.quantity,
-                "size": i.size,
-                "price_at_time": i.price_at_time,
-                "product": i.product,
-            }
-            for i in order.items
-        ],
-    )
+    return _build_order_response(order, locale)
 
 
 @router.get("", response_model=list[OrderResponse])
 def get_orders(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    locale: str = Depends(get_locale),
 ):
     orders = (
         db.query(Order)
@@ -98,24 +107,4 @@ def get_orders(
         .all()
     )
 
-    return [
-        OrderResponse(
-            id=o.id,
-            total=o.total,
-            status=o.status,
-            shipping_address=o.shipping_address,
-            created_at=str(o.created_at) if o.created_at else None,
-            items=[
-                {
-                    "id": i.id,
-                    "product_id": i.product_id,
-                    "quantity": i.quantity,
-                    "size": i.size,
-                    "price_at_time": i.price_at_time,
-                    "product": i.product,
-                }
-                for i in o.items
-            ],
-        )
-        for o in orders
-    ]
+    return [_build_order_response(o, locale) for o in orders]

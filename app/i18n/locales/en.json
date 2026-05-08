@@ -1,0 +1,30 @@
+{
+  "order_status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "messages": {
+    "payment_success": "Payment processed successfully!",
+    "payment_failed": "Payment could not be processed.",
+    "order_placed": "Your order has been placed successfully!",
+    "cart_empty": "Your cart is empty.",
+    "email_registered": "This email is already registered.",
+    "invalid_credentials": "Invalid email or password.",
+    "welcome": "Welcome to LuxeCart API!",
+    "locale_updated": "Language preference updated successfully.",
+    "invalid_locale": "Unsupported language. Supported: en, de, te.",
+    "credentials_invalid": "Could not validate credentials."
+  },
+  "labels": {
+    "order": "Order",
+    "total": "Total",
+    "shipping_address": "Shipping Address",
+    "quantity": "Quantity",
+    "price": "Price",
+    "size": "Size",
+    "status": "Status"
+  }
+}
